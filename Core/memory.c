@@ -632,7 +632,7 @@ static uint8_t read_high_memory(GB_gameboy_t *gb, uint16_t addr)
             case GB_IO_DMA:
                 return gb->io_registers[addr & 0xFF];
             case GB_IO_LCDC:
-	    	printf("IO_LCDC Accessed for read\n");
+	    	GB_log(gb, "IO_LCDC Accessed for read ROM: 0x%02X PC: 0x%04X\n", gb->mbc_rom_bank, gb->pc);
 	    	return reverseValue(gb->io_registers[addr & 0xFF]);
             case GB_IO_LCDC_PKT:
 	    	return reverseValue(gb->io_registers[0x40]);
@@ -1357,7 +1357,7 @@ static void write_high_memory(GB_gameboy_t *gb, uint16_t addr, uint8_t value)
 
 
             case GB_IO_LCDC:
-	    	printf("IO_LCDC Accessed with value to write: %02X\n", value);
+	    	GB_log(gb, "IO_LCDC Accessed with value to write: 0x%02X ROM: %02X PC: 0x%04X\n", value, gb->mbc_rom_bank, gb->pc);
 	    case GB_IO_LCDC_PKT:
 	    	value = reverseValue(value);
                 if ((value & 0x80) && !(gb->io_registers[GB_IO_LCDC] & 0x80)) {
