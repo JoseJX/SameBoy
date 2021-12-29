@@ -195,7 +195,7 @@ enum {
     /* General CGB features */
     GB_IO_KEY1       = 0x4d, // CGB Mode Only - Prepare Speed Switch
 
-    /* Missing */
+    GB_IO_LCDC_PKT   = 0x4e, // LCD Control (R/W)
 
     GB_IO_VBK        = 0x4f, // CGB Mode Only - VRAM Bank
     GB_IO_BANK       = 0x50, // Write to disable the BIOS mapping
@@ -714,23 +714,23 @@ struct GB_gameboy_internal_s {
         /* SLD (Todo: merge with backtrace) */
         bool stack_leak_detection;
         signed debug_call_depth;
-        uint16_t sp_for_call_depth[0x200]; /* Should be much more than enough */
-        uint16_t addr_for_call_depth[0x200];
+        uint16_t sp_for_call_depth[0x1000]; /* Should be much more than enough */
+        uint16_t addr_for_call_depth[0x1000];
 
         /* Backtrace */
         unsigned backtrace_size;
-        uint16_t backtrace_sps[0x200];
+        uint16_t backtrace_sps[0x1000];
         struct {
             uint16_t bank;
             uint16_t addr;
-        } backtrace_returns[0x200];
+        } backtrace_returns[0x1000];
 
         /* Watchpoints */
         uint16_t n_watchpoints;
         struct GB_watchpoint_s *watchpoints;
 
         /* Symbol tables */
-        GB_symbol_map_t *bank_symbols[0x200];
+        GB_symbol_map_t *bank_symbols[0x1000];
         GB_reversed_symbol_map_t reversed_symbol_map;
 
         /* Ticks command */
