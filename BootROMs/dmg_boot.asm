@@ -73,8 +73,8 @@ Start:
     ldh [$ff42], a
     
     ; Turn on LCD
-    ld a, $91
-    ldh [$40], a
+    ld a, $89		; fix
+    ldh [$4e], a	; fix
 
     ld d, (-119) & $FF
     ld c, 15

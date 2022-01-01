@@ -70,8 +70,8 @@ Start:
 .tilemapDone
 
     ; Turn on LCD
-    ld a, $91
-    ldh [$40], a
+    ld a, $89		; fix
+    ldh [$4e], a	; fix
 
     ld a, $f1 ; Packet magic, increases by 2 for every packet
     ldh [$80], a
