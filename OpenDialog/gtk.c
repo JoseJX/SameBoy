@@ -80,6 +80,7 @@ char *do_open_rom_dialog(void)
     
     
     void *filter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(filter, "*.pocket");
     gtk_file_filter_add_pattern(filter, "*.gb");
     gtk_file_filter_add_pattern(filter, "*.gbc");
     gtk_file_filter_add_pattern(filter, "*.sgb");
